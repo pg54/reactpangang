@@ -34,8 +34,8 @@ class Menu extends Component{
 	}
 	handleClickLi(e){
 		console.log(e.target)
-		//const rootNode=(e.target.nodeName==_rootNodeName)?e.target:this.getRootNode(e.target,_rootNodeName)
-		//this.handleFoldMenu(rootNode,e)
+		const rootNode=(e.target.nodeName==_rootNodeName)?e.target:this.getRootNode(e.target,_rootNodeName)
+		this.handleFoldMenu(rootNode,e)
 	}
 	handleFoldMenu(node,e){
 		if(~node.className.indexOf(_subshow)) {
@@ -60,6 +60,7 @@ class Menu extends Component{
 						d.submenus.length?<div className="arrow-up"></div>:null
 					}
 				</a>
+				<Submenus ds={d.submenus} location={location} />
 			</li>
 		)
 	}
