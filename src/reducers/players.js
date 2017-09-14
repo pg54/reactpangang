@@ -12,6 +12,7 @@ const initState=[
 ]
 
 const players=(state=initState,action)=>{
+    debugger
     switch(action.type){
         case T.ADD_PLAYER: 
             return [
