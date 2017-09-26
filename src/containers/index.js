@@ -25,6 +25,10 @@ window.pageMapRoute={
 		url: '/players',
 		page: Pages.Players
 	},
+	mygithub: {
+		url: '/mygithub',
+		page: Pages.MyGithub
+	},
 }
 // 左侧菜单栏配置
 window.menusMapRoute=[
@@ -50,6 +54,10 @@ window.menusMapRoute=[
 			{
 				name: '球员列表',
 			    url: pageMapRoute.players.url,
+		    },
+			{
+				name: 'MyGithub',
+			    url: pageMapRoute.mygithub.url,
 		    },
 	    ]
 	},

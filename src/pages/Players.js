@@ -1,24 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addPlayer } from '../actions/players'
+import { addPlayer,fetchList } from '../actions/players'
 
 class Players extends Component{
+    handleClick2(){
+        const { fetchList } = this.props
+        fetchList('nba')
+    }
     handleClick(){
-        // debugger
-        window.store.dispatch({
-            type:'ADD_PLAYER',
-            data:{
-             number:7,
-             name:'melo'
-            }
-           })
-        // addPlayer({
-        //     number: 7,
-        //     name:'anthony',
-        // })
+        const { addPlayer } = this.props
+        addPlayer({
+            number: 7,
+            name:'anthony',
+        })
     }
 	render(){
-        const { players } = this.props
+        const { players,isFetching,items } = this.props
         console.log(this.props)
 		return (
             <div style={{padding:10}}>
@@ -28,20 +25,46 @@ class Players extends Component{
                     {
                         players.map(d=><div key={d.number}>{d.number} {d.name}</div>)
                     }
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div>&nbsp;</div>
+                    <div onClick={this.handleClick2.bind(this)} style={{backgroundColor:'#ccc',padding:3,width:100}}>Request</div>
+                    <div>
+                    {
+                        isFetching?'Loading...':''
+                    }
+                    </div>
+                    
+                    <div>
+                        {
+                            items.length
+                        }
+                    </div>
                 </div>
             </div>
 		)
 	}
 }
 const mapStateToProps=(state)=>{
-    const { players } = state
+    const { players , subreddits } = state
+    console.log(subreddits)
+    const { isFetching, items, result } = subreddits['nba'] || {
+	    isFetching: false,
+        items:[],
+        result:{},
+	}
 	return {
-        players
+        players,
+        isFetching,
+        items,
+        result,
 	}	
 }
 const mapDispatchToProps={
-    // addPlayer:window.store.dispatch(addPlayer)
-    // addPlayer
+    addPlayer,
+    fetchList,
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Players)
 
